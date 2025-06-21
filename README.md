@@ -72,37 +72,55 @@ Sebuah kalkulator sederhana yang dibangun menggunakan bahasa pemrograman Rust. A
 - [x] Gunakan nama variabel yang deskriptif dan unik
 - [x] Hindari menggunakan nama yang sama di scope yang sama
 - [x] Aktifkan peringatan shadowing di Rust:
+
+### Task 8: Data Type
+- [x] Tipe Data Dasar (Primitif)
+    - f64 (64-bit floating point)
+    - String
+    - bool
+- [x] Tipe Data Komposit  
+    - Result<T, E> contoh di aplikasi : pub fn bagi()
+
+- [x] Tipe Data Referensi
+    - &str (baca_angka)
+
+- [x] Tipe Data Unit
+    - () fn clear_screen()
+
+- [x] Tipe Data dari Standard Library
+    - std::io::Result
+    - Digunakan untuk menangani operasi I/O
  
-### Task 8: Input Pengguna
+### Task 9: Input Pengguna
 - [x] Tambahkan input untuk memilih operasi
   - [x] Gunakan `std::io::stdin()` untuk membaca input
 - [ ] Tambahkan input untuk dua angka
 - [ ] Pastikan untuk mengonversi input ke tipe data yang tepat
 
-### Task 9: Implementasi Operasi Dasar
+### Task 10: Implementasi Operasi Dasar
 - [ ] Tambahkan fungsi untuk penjumlahan
 - [ ] Tambahkan fungsi untuk pengurangan
 - [ ] Tambahkan fungsi untuk perkalian
 - [ ] Tambahkan fungsi untuk pembagian
   - [ ] Pastikan untuk menangani pembagian dengan nol
 
-### Task 10: Lakukan Perhitungan
+### Task 11: Lakukan Perhitungan
 - [ ] Tambahkan logika untuk memilih operasi berdasarkan input pengguna
 - [ ] Panggil fungsi operasi yang sesuai
 
-### Task 11: Tampilkan Hasil
+### Task 12: Tampilkan Hasil
 - [ ] Tampilkan hasil perhitungan ke pengguna
 - [ ] Tanyakan kepada pengguna jika ingin melakukan perhitungan lagi
 
-### Task 9: Uji Aplikasi
+### Task 13: Uji Aplikasi
 - [ ] Jalankan aplikasi dengan `cargo run`
 - [ ] Uji semua operasi dengan berbagai input
 - [ ] Perbaiki bug yang ditemukan
 
-### Task 10: Dokumentasi
+### Task 14: Dokumentasi
 - [ ] Tambahkan komentar di dalam kode untuk penjelasan
 - [x] Buat README.md dengan penjelasan tentang cara menggunakan kalkulator
 
-### Task 11: (Opsional) Tambahkan Fitur Tambahan
+### Task 15: (Opsional) Tambahkan Fitur Tambahan
 - [ ] Tambahkan kemampuan untuk mendukung operasi lebih lanjut (mis. persen, eksponen)
 - [ ] Tambahkan antarmuka pengguna grafis (GUI) menggunakan pustaka seperti `gtk-rs` atau `druid`

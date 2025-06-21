@@ -3,19 +3,19 @@ use std::process::Command;
 
 fn main() {
     // Deklarasi variabel
-    let mut angka_pertama: f64 = 0.0;      // MUTABLE - nilainya bisa diubah
-    let mut angka_kedua: f64 = 0.0;        // MUTABLE - nilainya bisa diubah
-    let mut hasil: f64 = 0.0;              // MUTABLE - akan menyimpan hasil perhitungan
-    let mut pesan_error = String::new();    // MUTABLE - untuk menampung pesan error
-    let mut lanjut = true;                 // MUTABLE - untuk kontrol loop
-    let mut input_valid: bool;             // MUTABLE - untuk validasi input
+    let mut angka_pertama: f64;      // MUTABLE - nilainya bisa diubah
+    let mut angka_kedua: f64;        // MUTABLE - nilainya bisa diubah
+    let mut hasil: f64;              // MUTABLE - akan menyimpan hasil perhitungan
+    let mut _pesan_error = String::new();    // MUTABLE - untuk menampung pesan error
+    let mut _lanjut = true;                 // MUTABLE - untuk kontrol loop
+    let mut _input_valid: bool;             // MUTABLE - untuk validasi input
 
     loop {
         clear_screen();
         menu();
         
         // Reset variabel
-        input_valid = false;               // MUTABLE - diubah nilainya
+        _input_valid = false;               // MUTABLE - diubah nilainya
         let mut pilihan = String::new();   // MUTABLE - untuk menyimpan input pengguna
         
         // Baca pilihan operasi
@@ -25,25 +25,44 @@ fn main() {
         match io::stdin().read_line(&mut pilihan) {
             Ok(_) => {
                 match pilihan.trim() {
-                    "1" | "2" | "3" | "4" => {
-                        // Baca dua angka untuk operasi
+                    "1" => {
+                        // Penjumlahan
+                        angka_pertama = baca_angka("Masukkan angka pertama: ");
+                        angka_kedua = baca_angka("Masukkan angka kedua: ");
+                        hasil = tambah(angka_pertama, angka_kedua);
+                        println!("\nHasil {} + {} = {}", angka_pertama, angka_kedua, hasil);
+                        pause();
+                    },
+                    "2" => {
+                        // Pengurangan
+                        angka_pertama = baca_angka("Masukkan angka pertama: ");
+                        angka_kedua = baca_angka("Masukkan angka kedua: ");
+                        hasil = kurang(angka_pertama, angka_kedua);
+                        println!("\nHasil {} - {} = {}", angka_pertama, angka_kedua, hasil);
+                        pause();
+                    },
+                    "3" => {
+                        // Perkalian
+                        angka_pertama = baca_angka("Masukkan angka pertama: ");
+                        angka_kedua = baca_angka("Masukkan angka kedua: ");
+                        hasil = kali(angka_pertama, angka_kedua);
+                        println!("\nHasil {} * {} = {}", angka_pertama, angka_kedua, hasil);
+                        pause();
+                    },
+                    "4" => {
+                        // Pembagian
                         angka_pertama = baca_angka("Masukkan angka pertama: ");
                         angka_kedua = baca_angka("Masukkan angka kedua: ");
                         
-                        // Tampilkan input untuk verifikasi
-                        println!("\nAnda memilih: {}", 
-                            match pilihan.trim() {
-                                "1" => "Penjumlahan",
-                                "2" => "Pengurangan",
-                                "3" => "Perkalian",
-                                "4" => "Pembagian",
-                                _ => ""
+                        match bagi(angka_pertama, angka_kedua) {
+                            Ok(hasil_bagi) => {
+                                hasil = hasil_bagi;
+                                println!("\nHasil {} / {} = {}", angka_pertama, angka_kedua, hasil);
+                            },
+                            Err(pesan_error) => {
+                                println!("\nError: {}", pesan_error);
                             }
-                        );
-                        println!("Angka pertama: {}", angka_pertama);
-                        println!("Angka kedua: {}", angka_kedua);
-                        
-                        // Tunggu input pengguna sebelum melanjutkan
+                        }
                         pause();
                     },
                     "5" => {
@@ -113,6 +132,30 @@ fn baca_angka(pesan: &str) -> f64 {        // pesan: IMMUTABLE reference
     }
 }
 
+// Fungsi penjumlahan
+pub fn tambah(a: f64, b: f64) -> f64 {
+    a + b
+}
+
+// Fungsi pengurangan
+pub fn kurang(a: f64, b: f64) -> f64 {
+    a - b
+}
+
+// Fungsi perkalian
+pub fn kali(a: f64, b: f64) -> f64 {
+    a * b
+}
+
+// Fungsi pembagian menggunakan tipe data Result
+pub fn bagi(a: f64, b: f64) -> Result<f64, String> {
+    if b == 0.0 {
+        return Err("Tidak bisa membagi dengan nol".to_string());
+    }
+    Ok(a / b)
+}
+
+
 // cargo test test_variable -- --nocapture --exact
 #[test]
 fn test_variable() {
@@ -148,33 +191,16 @@ fn static_typing() {
 // cargo test shadowing -- --nocapture --exact
 #[test]
 fn shadowing() {
-    let name = "Eko Kurniawan Khannedy";
+    let name = "Audyari Wiyono";
     println!("Hello {}", name);
 
     let name = 10;
     println!("Hello {}", name);
 }
 
-// cargo test test_deteksi_shadowing_di_baca_angka -- --nocapture --exact
+// cargo test explicit_type -- --nocapture --exact
 #[test]
-fn test_deteksi_shadowing_di_baca_angka() {
-   
-    // Simulasikan input "42\n"
-    let input = b"42\n";
-    let mut cursor = std::io::Cursor::new(input);
-
-    // Simpan stdin asli
-    let original_stdin = std::io::stdin();
-
-    // Ganti stdin dengan cursor kita
-    let _guard = Box::new(original_stdin.lock());
-
-    // Test
-    let result = {
-        let mut input_string = String::new();
-        std::io::Read::read_to_string(&mut cursor, &mut input_string).unwrap();
-        input_string.trim().parse::<f64>().unwrap()
-    };
-
-    assert_eq!(result, 42.0, "Fungsi baca_angka seharusnya tidak mengandung shadowing");
+fn explicit_type() {
+let age: i32 = 20;
+println! ("{}", age);
 }
