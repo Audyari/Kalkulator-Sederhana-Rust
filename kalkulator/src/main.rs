@@ -377,3 +377,121 @@ fn char_type() {
     let char2: char = 'b';
     println!("{} {}", char1, char2);
 }
+
+// cargo test tuple -- --nocapture --exact
+#[test]
+fn tuple() {
+    let data: (i32, f64, bool) = (18, 10.5, true);
+    println!("{:?}", data);
+}
+
+// cargo test tuple_access -- --nocapture --exact
+#[test]
+fn tuple_access() {
+    let data: (i32, f64, bool) = (10, 10.5, true);
+    println!("{:?}", data);
+    let a = data.0;
+    let b = data.1;
+    let c = data.2;
+    println!("{} {} {}", a, b, c);
+}
+
+// cargo test tuple_dereference -- --nocapture --exact
+#[test]
+fn tuple_dereference() {
+    let data: (i32, f64, bool) = (16, 10.5, true);
+    println!("{:?}", data);
+    let (a, b, c) = data;
+    println!("{} {} {}", a, b, c);
+}
+
+// cargo test tuple_mutability -- --nocapture --exact
+#[test]
+fn mutable_tuple() {
+    let mut data: (i32, f64, bool) = (10, 10.5, true);
+    println!("{:?}", data);
+
+    let (a, b, c) = data;
+    println!("{} {} {}", a, b, c);
+
+    data.0 = 20;
+    data.1 = 20.5;
+    data.2 = false;
+    println!("{:?}", data);
+}
+
+// cargo test unit_type -- --nocapture --exact
+#[test]
+fn test_unit_type() {
+    let _unit: () = ();  // Inisialisasi tipe unit
+    let result = println!("Ini adalah tipe unit");
+    assert_eq!(result, ());  // println! mengembalikan ()
+    
+    let fungsi_kosong = || {};
+    assert_eq!(fungsi_kosong(), ());
+}
+
+// cargo test array -- --nocapture --exact
+#[test]
+fn array() {
+    let array: [i32; 5] = [1, 2, 3, 4, 5];
+    println!("{:?}", array);
+}
+
+// cargo test array_access -- --nocapture --exact
+#[test]
+fn array_access() {
+    let array: [i32; 5] = [1, 2, 3, 4, 5];
+    println!("{:?}", array);
+    let a = array[0];
+    let b = array[1];
+    println!("{} {}", a, b);
+}
+
+// cargo test array_mutability -- --nocapture --exact
+#[test]
+fn array_mutability() {
+    let mut array: [i32; 5] = [1, 2, 3, 4, 5];
+    println!("{:?}", array);
+
+    let a = array[0];
+    let b = array[1];
+    println!("{} {}", a, b);
+
+    array[0] = 16;
+    array[1] = 20;
+    println!("{:?}", array);
+}
+
+// cargo test array_length -- --nocapture --exact
+#[test]
+fn array_length() {
+    let mut array: [i32; 5] = [1, 2, 3, 4, 5];
+
+    let a = array[0];
+    let b = array[1];
+    println!("{} {}", a, b);
+
+    array[0] = 10;
+    array[1] = 20;
+    println!("{:?}", array);
+
+    let length: usize = array.len();
+    println!("Panjang array: {}", length);
+}
+
+// cargo test two_dimensional_array -- --nocapture --exact
+#[test]
+fn two_dimensional_array() {
+    let matrix: [[i32; 2]; 3] = [
+        [32, 41],
+        [1, 6],
+        [11, 16],
+    ];
+
+    println!("{:?}", matrix);
+    println!("{}", matrix[0][1]);
+    println!("{}", matrix[1][0]);
+    println!("{}", matrix[2][1]);
+    println!("{}", matrix[1][1]);
+}
