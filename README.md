@@ -26,11 +26,10 @@ Sebuah kalkulator sederhana yang dibangun menggunakan bahasa pemrograman Rust. A
 - [x] `cargo run`
 - [x] `cargo build --release`
 
-### Task 3: Struktur Program
-- [x] Buka file `src/main.rs`
-- [x] Tambahkan fungsi `main`
-  - [x] Buat fungsi untuk mencetak menu
-
+### Task 3: Unit-Testing
+- [x] Tambahkan unit testing
+- [x] Tambahkan unit testing untuk operasi matematika dasar
+- [x] Tambahkan unit testing untuk operasi matematika kompleks
 
 ### Task 4: Input Pengguna
 - [x] Tambahkan input untuk memilih operasi

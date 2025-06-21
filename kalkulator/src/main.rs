@@ -57,3 +57,10 @@ fn menu() {
     println!("5. Keluar");
     println!("==============================");
 }
+
+
+// cargo test hello_test -- --nocapture --exact
+#[test]
+fn hello_test() {
+    println!("Hello Test");
+}
