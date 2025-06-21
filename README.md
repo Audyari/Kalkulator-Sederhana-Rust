@@ -97,6 +97,9 @@ Sebuah kalkulator sederhana yang dibangun menggunakan bahasa pemrograman Rust. A
 - [x] Konversi Tipe Data Number
     - Contoh di aplikasi : input.trim().parse::<f64>()
 
+- [x] Konstanta
+    - Contoh di aplikasi : ERR_DIV_ZERO
+
 ### Task 10: Unit Testing harus belajar mock input
 - [x] PR HARUS BELAJAR MOCK INPUT
 

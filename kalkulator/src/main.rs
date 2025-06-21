@@ -1,6 +1,16 @@
 use std::io::{self, Write};
 use std::process::Command;
 
+// Konstanta untuk pesan error
+const ERR_DIV_ZERO: &str = "Error: Tidak bisa membagi dengan nol";
+const ERR_INVALID_INPUT: &str = "Error: Input tidak valid";
+
+// Batas input
+const MAX_INPUT: f64 = 1_000_000.0;
+const MIN_INPUT: f64 = -1_000_000.0;
+
+
+
 fn main() {
     // Deklarasi variabel
     let mut angka_pertama: f64;      // MUTABLE - nilainya bisa diubah
@@ -10,6 +20,7 @@ fn main() {
     let mut _lanjut = true;                 // MUTABLE - untuk kontrol loop
     let mut _input_valid: bool;             // MUTABLE - untuk validasi input
 
+  
     loop {
         clear_screen();
         menu();
@@ -138,18 +149,18 @@ fn menu() {
 }
 
 // Fungsi untuk membaca input angka dari pengguna
-// Parameter 'pesan' adalah IMMUTABLE - tidak bisa diubah di dalam fungsi
-fn baca_angka(pesan: &str) -> f64 {        // pesan: IMMUTABLE reference
+fn baca_angka(pesan: &str) -> f64 {
     loop {
-        let mut input = String::new();    // MUTABLE - untuk menyimpan input sementara
+        let mut input = String::new();
         print!("{} ", pesan);
         io::stdout().flush().unwrap();
         
-        match io::stdin().read_line(&mut input) {  // &mut membuat mutable reference ke input
+        match io::stdin().read_line(&mut input) {
             Ok(_) => {
                 match input.trim().parse::<f64>() {
-                    Ok(angka) => return angka,  // angka: IMMUTABLE - hanya dibaca
-                    Err(_) => println!("Input tidak valid. Masukkan angka yang benar.")
+                    Ok(angka) if angka >= MIN_INPUT && angka <= MAX_INPUT => return angka,
+                    Ok(_) => println!("Angka harus antara {} dan {}", MIN_INPUT, MAX_INPUT),
+                    Err(_) => println!("{}", ERR_INVALID_INPUT)
                 }
             },
             Err(_) => println!("Gagal membaca input")
@@ -175,7 +186,8 @@ pub fn kali(a: f64, b: f64) -> f64 {
 // Fungsi pembagian menggunakan tipe data Result
 pub fn bagi(a: f64, b: f64) -> Result<f64, String> {
     if b == 0.0 {
-        return Err("Tidak bisa membagi dengan nol".to_string());
+        //return Err("Tidak bisa membagi dengan nol".to_string());
+        return Err(ERR_DIV_ZERO.to_string());
     }
     Ok(a / b)
 }
@@ -185,8 +197,12 @@ fn hitung_semua(a: f64, b: f64) -> (f64, f64, f64, f64, &'static str) {
     let tambah = a + b;
     let kurang = a - b;
     let kali = a * b;
-    let bagi = if b != 0.0 { a / b } else { f64::NAN };
-    let status = if b != 0.0 { "Berhasil" } else { "Error: Pembagian nol" };
+    
+    let (bagi, status) = if b != 0.0 {
+        (a / b, "Berhasil")
+    } else {
+        (f64::NAN, ERR_DIV_ZERO)
+    };
     
     (tambah, kurang, kali, bagi, status)
 }
@@ -494,4 +510,13 @@ fn two_dimensional_array() {
     println!("{}", matrix[1][0]);
     println!("{}", matrix[2][1]);
     println!("{}", matrix[1][1]);
+}
+
+const MAXIMUM: i32 = 160;
+
+// cargo test constant -- --nocapture --exact
+#[test]
+fn constant(){
+const MINIMUM: i32 = 0;
+println!("{} {}", MINIMUM, MAXIMUM);
 }
