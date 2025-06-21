@@ -1,48 +1,67 @@
-# Proyek: Kalkulator Sederhana dengan Rust
+# Kalkulator Sederhana dengan Rust
 
-## Task 1: Siapkan Lingkungan Pengembangan
-- [ ] Install Rust
-  - [ ] Kunjungi [rust-lang.org](https://www.rust-lang.org/)
-  - [ ] Ikuti petunjuk instalasi untuk sistem operasi kamu
-- [ ] Buat proyek baru
-  - [ ] Jalankan perintah `cargo new kalkulator`
-  - [ ] Masuk ke direktori proyek dengan `cd kalkulator`
+Sebuah kalkulator sederhana yang dibangun menggunakan bahasa pemrograman Rust. Aplikasi ini beroperasi melalui command line dan mendukung operasi matematika dasar seperti penjumlahan, pengurangan, perkalian, dan pembagian.
 
-## Task 2: Struktur Program
-- [ ] Buka file `src/main.rs`
-- [ ] Tambahkan fungsi `main`
-  - [ ] Buat fungsi untuk mencetak menu
+## Fitur
 
-## Task 3: Input Pengguna
-- [ ] Tambahkan input untuk memilih operasi
-  - [ ] Gunakan `std::io::stdin()` untuk membaca input
+- [x] Menu interaktif
+- [x] Operasi dasar (+, -, *, /)
+- [x] Antarmuka baris perintah yang user-friendly
+- [x] Validasi input
+- [ ] Riwayat perhitungan
+- [ ] Dukungan untuk bilangan desimal
+- [ ] Mode kalkulator ilmiah
+
+## Daftar Tugas
+
+### Task 1: Siapkan Lingkungan Pengembangan
+- [x] Install Rust
+  - [x] Kunjungi [rust-lang.org](https://www.rust-lang.org/)
+  - [x] Ikuti petunjuk instalasi untuk sistem operasi kamu
+- [x] Buat proyek baru
+  - [x] Jalankan perintah `cargo new kalkulator`
+  - [x] Masuk ke direktori proyek dengan `cd kalkulator`
+
+### Task 2: Build dan Run
+- [x] `cargo run`
+- [x] `cargo build --release`
+
+### Task 3: Struktur Program
+- [x] Buka file `src/main.rs`
+- [x] Tambahkan fungsi `main`
+  - [x] Buat fungsi untuk mencetak menu
+
+
+### Task 4: Input Pengguna
+- [x] Tambahkan input untuk memilih operasi
+  - [x] Gunakan `std::io::stdin()` untuk membaca input
 - [ ] Tambahkan input untuk dua angka
-  - [ ] Pastikan untuk mengonversi input ke tipe data yang tepat
+- [ ] Pastikan untuk mengonversi input ke tipe data yang tepat
 
-## Task 4: Implementasi Operasi Dasar
+### Task 5: Implementasi Operasi Dasar
 - [ ] Tambahkan fungsi untuk penjumlahan
 - [ ] Tambahkan fungsi untuk pengurangan
 - [ ] Tambahkan fungsi untuk perkalian
 - [ ] Tambahkan fungsi untuk pembagian
   - [ ] Pastikan untuk menangani pembagian dengan nol
 
-## Task 5: Lakukan Perhitungan
+### Task 6: Lakukan Perhitungan
 - [ ] Tambahkan logika untuk memilih operasi berdasarkan input pengguna
 - [ ] Panggil fungsi operasi yang sesuai
 
-## Task 6: Tampilkan Hasil
+### Task 7: Tampilkan Hasil
 - [ ] Tampilkan hasil perhitungan ke pengguna
 - [ ] Tanyakan kepada pengguna jika ingin melakukan perhitungan lagi
 
-## Task 7: Uji Aplikasi
+### Task 8: Uji Aplikasi
 - [ ] Jalankan aplikasi dengan `cargo run`
 - [ ] Uji semua operasi dengan berbagai input
 - [ ] Perbaiki bug yang ditemukan
 
-## Task 8: Dokumentasi
+### Task 9: Dokumentasi
 - [ ] Tambahkan komentar di dalam kode untuk penjelasan
-- [ ] Buat README.md dengan penjelasan tentang cara menggunakan kalkulator
+- [x] Buat README.md dengan penjelasan tentang cara menggunakan kalkulator
 
-## Task 9: (Opsional) Tambahkan Fitur Tambahan
+### Task 10: (Opsional) Tambahkan Fitur Tambahan
 - [ ] Tambahkan kemampuan untuk mendukung operasi lebih lanjut (mis. persen, eksponen)
 - [ ] Tambahkan antarmuka pengguna grafis (GUI) menggunakan pustaka seperti `gtk-rs` atau `druid`
