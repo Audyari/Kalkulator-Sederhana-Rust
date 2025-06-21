@@ -77,7 +77,7 @@ Sebuah kalkulator sederhana yang dibangun menggunakan bahasa pemrograman Rust. A
 - [x] Tipe Data Dasar (Primitif)
     - f64 (64-bit floating point)
     - String
-    - bool
+    - bool 
 - [x] Tipe Data Komposit  
     - Result<T, E> contoh di aplikasi : pub fn bagi()
 
@@ -90,37 +90,47 @@ Sebuah kalkulator sederhana yang dibangun menggunakan bahasa pemrograman Rust. A
 - [x] Tipe Data dari Standard Library
     - std::io::Result
     - Digunakan untuk menangani operasi I/O
+
+- [x] Tipe Data Tuple
+    - Contoh di aplikasi : pub fn hitung_semua()
+
+- [x] Konversi Tipe Data Number
+    - Contoh di aplikasi : input.trim().parse::<f64>()
+
+### Task 10: Unit Testing harus belajar mock input
+- [x] PR HARUS BELAJAR MOCK INPUT
+
  
-### Task 9: Input Pengguna
+### Task 11: Input Pengguna
 - [x] Tambahkan input untuk memilih operasi
   - [x] Gunakan `std::io::stdin()` untuk membaca input
 - [ ] Tambahkan input untuk dua angka
 - [ ] Pastikan untuk mengonversi input ke tipe data yang tepat
 
-### Task 10: Implementasi Operasi Dasar
+### Task 12: Implementasi Operasi Dasar
 - [ ] Tambahkan fungsi untuk penjumlahan
 - [ ] Tambahkan fungsi untuk pengurangan
 - [ ] Tambahkan fungsi untuk perkalian
 - [ ] Tambahkan fungsi untuk pembagian
   - [ ] Pastikan untuk menangani pembagian dengan nol
 
-### Task 11: Lakukan Perhitungan
+### Task 13: Lakukan Perhitungan
 - [ ] Tambahkan logika untuk memilih operasi berdasarkan input pengguna
 - [ ] Panggil fungsi operasi yang sesuai
 
-### Task 12: Tampilkan Hasil
+### Task 14: Tampilkan Hasil
 - [ ] Tampilkan hasil perhitungan ke pengguna
 - [ ] Tanyakan kepada pengguna jika ingin melakukan perhitungan lagi
 
-### Task 13: Uji Aplikasi
+### Task 15: Uji Aplikasi
 - [ ] Jalankan aplikasi dengan `cargo run`
 - [ ] Uji semua operasi dengan berbagai input
 - [ ] Perbaiki bug yang ditemukan
 
-### Task 14: Dokumentasi
+### Task 16: Dokumentasi
 - [ ] Tambahkan komentar di dalam kode untuk penjelasan
 - [x] Buat README.md dengan penjelasan tentang cara menggunakan kalkulator
 
-### Task 15: (Opsional) Tambahkan Fitur Tambahan
+### Task 17: (Opsional) Tambahkan Fitur Tambahan
 - [ ] Tambahkan kemampuan untuk mendukung operasi lebih lanjut (mis. persen, eksponen)
 - [ ] Tambahkan antarmuka pengguna grafis (GUI) menggunakan pustaka seperti `gtk-rs` atau `druid`

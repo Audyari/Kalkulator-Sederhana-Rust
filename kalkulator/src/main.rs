@@ -19,7 +19,7 @@ fn main() {
         let mut pilihan = String::new();   // MUTABLE - untuk menyimpan input pengguna
         
         // Baca pilihan operasi
-        print!("\nPilih operasi (1-5): ");
+        print!("\nPilih operasi (1-6): ");
         io::stdout().flush().unwrap();
         
         match io::stdin().read_line(&mut pilihan) {
@@ -65,10 +65,33 @@ fn main() {
                         }
                         pause();
                     },
-                    "5" => {
-                        println!("\nTerima kasih telah menggunakan kalkulator ini!");
-                        break;
-                    },
+                   "5" => {
+                    // Minta input pengguna terlebih dahulu
+                    angka_pertama = baca_angka("Masukkan angka pertama: ");
+                    angka_kedua = baca_angka("Masukkan angka kedua: ");
+    
+                    // Menggunakan tuple untuk menampung hasil
+                    let (tambah, kurang, kali, bagi, status) = hitung_semua(angka_pertama, angka_kedua);
+
+                    println!("\n=== Hasil Semua Operasi ===");
+                    println!("{} + {} = {}", angka_pertama, angka_kedua, tambah);
+                    println!("{} - {} = {}", angka_pertama, angka_kedua, kurang);
+                    println!("{} * {} = {}", angka_pertama, angka_kedua, kali);
+    
+                    if angka_kedua != 0.0 {
+                        println!("{} / {} = {}", angka_pertama, angka_kedua, bagi);
+                    } else {
+                        println!("Pembagian dengan nol tidak diizinkan");
+                    }
+    
+                    println!("Status: {}", status);
+                    pause();
+                },
+                   "6" => {
+                    println!("\nTerima kasih telah menggunakan kalkulator ini!");
+                    break;
+                },
+
                     _ => {
                         println!("Pilihan tidak valid. Silakan pilih 1-5.");
                         pause();
@@ -102,13 +125,15 @@ fn pause() {
     io::stdin().read_line(&mut temp).unwrap();
 }
 
+// Fungsi untuk menampilkan menu
 fn menu() {
     println!("==== KALKULATOR SEDERHANA ====");
     println!("1. Penjumlahan");
     println!("2. Pengurangan");
     println!("3. Perkalian");
     println!("4. Pembagian");
-    println!("5. Keluar");
+    println!("5. Semua Operasi (Menggunakan Tuple)");
+    println!("6. Keluar");
     println!("==============================");
 }
 
@@ -155,6 +180,31 @@ pub fn bagi(a: f64, b: f64) -> Result<f64, String> {
     Ok(a / b)
 }
 
+// Fungsi yang mengembalikan tuple (f64, f64, &'static str)
+fn hitung_semua(a: f64, b: f64) -> (f64, f64, f64, f64, &'static str) {
+    let tambah = a + b;
+    let kurang = a - b;
+    let kali = a * b;
+    let bagi = if b != 0.0 { a / b } else { f64::NAN };
+    let status = if b != 0.0 { "Berhasil" } else { "Error: Pembagian nol" };
+    
+    (tambah, kurang, kali, bagi, status)
+}
+
+// cargo test test_tuple -- --nocapture --exact
+#[test]
+fn test_tuple() {
+    let (tambah, kurang, kali, bagi, status) = hitung_semua(10.0, 2.0);
+    println!("Hasil penjumlahan: {}", tambah);
+    println!("Hasil pengurangan: {}", kurang);
+    println!("Hasil perkalian: {}", kali);
+    println!("Hasil pembagian: {}", bagi);
+    println!("Status: {}", status);
+    
+    // Contoh akses elemen tuple dengan indeks
+    let hasil = hitung_semua(10.0, 2.0);
+    println!("Hasil perkalian (menggunakan indeks): {}", hasil.2);
+}
 
 // cargo test test_variable -- --nocapture --exact
 #[test]
@@ -203,4 +253,127 @@ fn shadowing() {
 fn explicit_type() {
 let age: i32 = 20;
 println! ("{}", age);
+}
+
+// cargo test number -- --nocapture --exact
+#[test]
+fn number() {
+    let a: i32 = 10;
+    println!("Tetapkan number: {}", a);
+
+    let b: f64 = 10.5;
+    println!("Tetapkan float: {}", b);
+}
+
+// cargo test number_conversion -- --nocapture --exact
+#[test]
+fn number_conversion() {
+    let a: i8 = 16;
+    println!("{}" , a);
+    let b: i16 = a as i16;
+    println!("{}", b);
+    let c: i32 = a as i32;
+    println!("{}", c);
+}
+
+// cargo test numeric_operator_of -- --nocapture --exact
+#[test]
+fn numeric_operator_of() {
+    let a = 10;
+    let b = 10;
+    let c = a * b;
+    println!("{}", c);
+}
+
+// cargo test augmented_assignment -- --nocapture --exact
+#[test]
+fn augmented_assignment() {
+    let mut a = 10;
+    println!("{} ", a);
+
+    a += 10;
+    println!("{} ", a);
+
+    a -= 10;
+    println!("{} ", a);
+}
+
+// cargo test boolean_of -- --nocapture --exact
+#[test]
+fn boolean_of() {
+    let a = true;
+    let b: bool = false;
+
+    println!("{} {}", a, b);
+}
+
+// cargo test comparison -- --nocapture --exact
+#[test]
+fn comparison() {
+    let result: bool = 10 > 20;
+    println!("{}", result);
+}
+
+// cargo test boolean_operator -- --nocapture --exact
+#[test]
+fn boolean_operator() {
+    let absen = 76;
+    let nilai_akhir = 860;
+    let lulus_absen = absen >= 75;
+    let lulus_nilai_akhir = nilai_akhir >= 75;
+    let lulus_final = lulus_absen && lulus_nilai_akhir;
+    println!("{}", lulus_final);
+}
+
+// cargo test test_aritmatika_dasar -- --nocapture --exact
+#[test]
+fn test_aritmatika_dasar() {
+    // Test penjumlahan
+    assert_eq!(tambah(5.0, 3.0), 8.0);
+    assert_eq!(tambah(-5.0, 3.0), -2.0);
+    assert_eq!(tambah(0.0, 0.0), 0.0);
+    
+    // Test pengurangan
+    assert_eq!(kurang(5.0, 3.0), 2.0);
+    assert_eq!(kurang(3.0, 5.0), -2.0);
+    
+    // Test perkalian
+    assert_eq!(kali(5.0, 3.0), 15.0);
+    assert_eq!(kali(5.0, 0.0), 0.0);
+    
+    // Test pembagian
+    assert!(bagi(6.0, 3.0).is_ok_and(|x| (x - 2.0).abs() < f64::EPSILON));
+    assert!(bagi(5.0, 0.0).is_err());
+    assert!(bagi(0.0, 5.0).is_ok_and(|x| (x - 0.0).abs() < f64::EPSILON));
+}
+
+// cargo test test_hitung_semua -- --nocapture --exact
+#[test]
+fn test_hitung_semua() {
+    // Test kasus normal
+    let (tambah, kurang, kali, bagi, status) = hitung_semua(10.0, 2.0);
+    assert!((tambah - 12.0).abs() < f64::EPSILON);
+    assert!((kurang - 8.0).abs() < f64::EPSILON);
+    assert!((kali - 20.0).abs() < f64::EPSILON);
+    assert!((bagi - 5.0).abs() < f64::EPSILON);
+    assert_eq!(status, "Berhasil");
+    
+    // Test pembagian dengan nol
+    let (_, _, _, bagi, status) = hitung_semua(10.0, 0.0);
+    assert!(bagi.is_nan());
+    assert_eq!(status, "Error: Pembagian nol");
+    
+    // Test angka negatif
+    let (tambah, kurang, kali, _bagi, _) = hitung_semua(-5.0, 3.0);
+    assert!((tambah - (-2.0)).abs() < f64::EPSILON);
+    assert!((kurang - (-8.0)).abs() < f64::EPSILON);
+    assert!((kali - (-15.0)).abs() < f64::EPSILON);
+}
+
+// cargo test char_type -- --nocapture --exact
+#[test]
+fn char_type() {
+    let char1: char = 'a';
+    let char2: char = 'b';
+    println!("{} {}", char1, char2);
 }
